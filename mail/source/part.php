@@ -133,6 +133,7 @@
 
     public function contentEncoded()
     {
+      // FIXME Quoted-printable currently seems to use wrong transfer encoding.
       if(Mail_Part::CONTENT_ENCODING_QUOTED_PRINTABLE===$this->encoding)
         return quoted_printable_encode($this->content);
       if(Mail_Part::CONTENT_ENCODING_BASE64===$this->encoding)
