@@ -18,7 +18,7 @@
    * @property string encoding
    * @property Io_MimeType mimeType
    */
-  abstract class Mail_Part
+  class Mail_Part
   {
     // PREDEFINED PROPERTIES
     const CONTENT_DISPOSITION_INLINE='inline';
@@ -81,7 +81,11 @@
     public function attach(Mail_Part $part_)
     {
       $part_->contentDisposition=self::CONTENT_DISPOSITION_ATTACHMENT;
-      array_push($this->m_partsRelated, $part_);
+
+      if(Mail_Part instanceof Mail_Part_File)
+        array_push($this->m_parts, $part_);
+      else
+        array_push($this->m_partsRelated, $part_);
 
       return $this;
     }
@@ -250,6 +254,7 @@
       }
     }
 
+    // FIXME (CSH) Build hierarchy correctly ...
     protected function compileMessage()
     {
       $message=array();
@@ -266,7 +271,17 @@
         $message[]=$part->source();
       }
 
-      if(count($this->m_partsAlternative) || count($this->m_parts))
+      if(count($this->m_partsRelated))
+      {
+        foreach($this->m_partsRelated as $part)
+        {
+          $message[]=sprintf('--%1$s', $this->boundary);
+          $message[]=$part->source();
+        }
+
+        $message[]=sprintf('--%1$s--', $this->boundary);
+      }
+      else if(count($this->m_partsAlternative) || count($this->m_parts))
       {
         $message[]=sprintf('--%1$s', $this->boundary);
         $message[]=sprintf('Content-Type: %1$s; charset=%2$s', $this->mimeType->name(), $this->mimeType->charset()->name());
