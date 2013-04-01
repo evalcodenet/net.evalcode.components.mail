@@ -16,7 +16,7 @@
     {
       parent::__construct($content_, md5($content_), Io_MimeType::TEXT_HTML($charset_));
 
-      $this->encoding=Mail_Part::CONTENT_ENCODING_QUOTED_PRINTABLE;
+      $this->encoding=Mail_Part::CONTENT_ENCODING_BASE64;
     }
     //--------------------------------------------------------------------------
 
