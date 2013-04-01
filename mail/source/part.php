@@ -48,6 +48,33 @@
     //--------------------------------------------------------------------------
 
 
+    // STATIC ACCESSORS
+    /**
+     * @return Mail_Part
+     */
+    public static function alternative()
+    {
+      return new self(null, md5(uniqid()), Io_MimeType::MULTIPART_ALTERNATIVE());
+    }
+
+    /**
+     * @return Mail_Part
+     */
+    public static function mixed()
+    {
+      return new self(null, md5(uniqid()), Io_MimeType::MULTIPART_MIXED());
+    }
+
+    /**
+     * @return Mail_Part
+     */
+    public static function related()
+    {
+      return new self(null, md5(uniqid()), Io_MimeType::MULTIPART_RELATED());
+    }
+    //--------------------------------------------------------------------------
+
+
     // ACCESSORS/MUTATORS
     /**
      * @param Mail_Part $part_
@@ -66,38 +93,10 @@
      *
      * @return Mail|Mail_Part
      */
-    public function addAlternative(Mail_Part $part_)
-    {
-      array_push($this->m_partsAlternative, $part_);
-
-      return $this;
-    }
-
-    /**
-     * @param Mail_Part $part_
-     *
-     * @return Mail|Mail_Part
-     */
     public function attach(Mail_Part $part_)
     {
       $part_->contentDisposition=self::CONTENT_DISPOSITION_ATTACHMENT;
-
-      if(Mail_Part instanceof Mail_Part_File)
-        array_push($this->m_parts, $part_);
-      else
-        array_push($this->m_partsRelated, $part_);
-
-      return $this;
-    }
-
-    /**
-     * @param Mail_Part $part_
-     *
-     * @return Mail|Mail_Part
-     */
-    public function embed(Mail_Part $part_)
-    {
-      array_push($this->m_partsRelated, $part_);
+      array_push($this->m_parts, $part_);
 
       return $this;
     }
@@ -137,7 +136,6 @@
 
     public function contentEncoded()
     {
-      // FIXME Quoted-printable currently seems to use wrong transfer encoding.
       if(Mail_Part::CONTENT_ENCODING_QUOTED_PRINTABLE===$this->encoding)
         return quoted_printable_encode($this->content);
       if(Mail_Part::CONTENT_ENCODING_BASE64===$this->encoding)
@@ -216,81 +214,52 @@
 
 
     // IMPLEMENTATION
-    protected $m_parts=array();
-    protected $m_partsAlternative=array();
-    protected $m_partsRelated=array();
-
     private $m_headers=array();
+    private $m_parts=array();
     private $m_properties=array();
 
     private $m_compiled=false;
+
     private $m_compiledHeaders='';
     private $m_compiledMessage='';
     private $m_compiledSource='';
     //-----
 
 
-    // TODO mb_encode_mimeheader ..
     protected function compileHeaders()
     {
-      if(count($this->m_partsRelated))
+      if(__CLASS__===get_class($this) || $this instanceof Mail)
       {
-        $this->header('Content-Type', sprintf('%1$s; boundary=%2$s', Io_MimeType::MULTIPART_RELATED($this->mimeType->charset()), $this->boundary));
-      }
-      else if(count($this->m_partsAlternative))
-      {
-        $this->header('Content-Type', sprintf('%1$s; boundary=%2$s', Io_MimeType::MULTIPART_ALTERNATIVE($this->mimeType->charset()), $this->boundary));
-      }
-      else if(count($this->m_parts))
-      {
-        $this->header('Content-Type', sprintf('%1$s; boundary=%2$s', Io_MimeType::MULTIPART_MIXED($this->mimeType->charset()), $this->boundary));
+        $this->header('Content-Type', sprintf('%1$s; boundary=%2$s', $this->mimeType, $this->boundary));
       }
       else
       {
         $this->header('Content-Type', sprintf('%1$s; charset=%2$s', $this->mimeType->name(), $this->mimeType->charset()->name()));
-        $this->header('Content-Disposition', $this->contentDisposition);
+
+        if($this instanceof Mail_Part_File)
+          $this->header('Content-Disposition', $this->contentDisposition);
+
         $this->header('Content-Transfer-Encoding', $this->encoding);
         $this->header('Content-MD5', $this->contentMd5);
       }
     }
 
-    // FIXME (CSH) Build hierarchy correctly ...
     protected function compileMessage()
     {
       $message=array();
 
-      foreach($this->m_partsAlternative as $part)
+      if(count($this->m_parts))
       {
-        $message[]=sprintf('--%1$s', $this->boundary);
-        $message[]=$part->source();
-      }
-
-      foreach($this->m_parts as $part)
-      {
-        $message[]=sprintf('--%1$s', $this->boundary);
-        $message[]=$part->source();
-      }
-
-      if(count($this->m_partsRelated))
-      {
-        foreach($this->m_partsRelated as $part)
+        foreach($this->m_parts as $part)
         {
-          $message[]=sprintf('--%1$s', $this->boundary);
+          if(__CLASS__===get_class($this) || $this instanceof Mail)
+            $message[]=sprintf('--%1$s', $this->boundary);
+
           $message[]=$part->source();
         }
 
-        $message[]=sprintf('--%1$s--', $this->boundary);
-      }
-      else if(count($this->m_partsAlternative) || count($this->m_parts))
-      {
-        $message[]=sprintf('--%1$s', $this->boundary);
-        $message[]=sprintf('Content-Type: %1$s; charset=%2$s', $this->mimeType->name(), $this->mimeType->charset()->name());
-        $message[]=sprintf('Content-Disposition: %1$s', $this->contentDisposition);
-        $message[]=sprintf('Content-Transfer-Encoding: %1$s', $this->encoding);
-        $message[]=sprintf('Content-MD5: %1$s', $this->contentMd5);
-        $message[]="\n";
-        $message[]=$this->contentEncoded();
-        $message[]=sprintf('--%1$s--', $this->boundary);
+        if(__CLASS__===get_class($this) || $this instanceof Mail)
+          $message[]=sprintf('--%1$s--', $this->boundary);
       }
       else
       {

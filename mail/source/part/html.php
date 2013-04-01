@@ -9,14 +9,14 @@
    *
    * @author evalcode.net
    */
-  class Mail_Part_Html extends  Mail_Part
+  class Mail_Part_Html extends Mail_Part
   {
     // CONSTRUCTION
     public function __construct($content_, Io_Charset $charset_)
     {
       parent::__construct($content_, md5($content_), Io_MimeType::TEXT_HTML($charset_));
 
-      $this->encoding=Mail_Part::CONTENT_ENCODING_BASE64;
+      $this->encoding=Mail_Part::CONTENT_ENCODING_QUOTED_PRINTABLE;
     }
     //--------------------------------------------------------------------------
 

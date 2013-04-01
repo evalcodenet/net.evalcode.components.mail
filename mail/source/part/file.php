@@ -37,7 +37,7 @@
     {
       if(false===$file_->exists())
       {
-        throw new Runtime_Exception('mail/part/image', sprintf(
+        throw new Runtime_Exception('mail/part/file', sprintf(
           'File does not exist [file: %1$s].', $file_
         ));
       }
@@ -46,12 +46,12 @@
 
       if(null===$mimeType)
       {
-        throw new Runtime_Exception('mail/part/image', sprintf(
+        throw new Runtime_Exception('mail/part/file', sprintf(
           'Unable to resolve mimetype for given file [file: %1$s].', $file_
         ));
       }
 
-      return new self($file_->getName(), $file_->getContent(), $mimeType);
+      return new static($file_->getName(), $file_->getContent(), $mimeType);
     }
 
     /**
@@ -66,7 +66,7 @@
     {
       if(false===@is_file($filepath_))
       {
-        throw new Runtime_Exception('mail/part/image', sprintf(
+        throw new Runtime_Exception('mail/part/file', sprintf(
           'Unable to resolve file for given path [filepath: %1$s].', $filepath_
         ));
       }
@@ -76,12 +76,12 @@
 
       if(null===$mimeType_)
       {
-        throw new Runtime_Exception('mail/part/image', sprintf(
+        throw new Runtime_Exception('mail/part/file', sprintf(
           'Unable to resolve mimetype for given path [filepath: %1$s].', $filepath_
         ));
       }
 
-      return new self(@basename($filepath_), @file_get_contents($filepath_), $mimeType_);
+      return new static(@basename($filepath_), @file_get_contents($filepath_), $mimeType_);
     }
 
     /**
@@ -100,12 +100,12 @@
 
       if(null===$mimeType_)
       {
-        throw new Runtime_Exception('mail/part/image', sprintf(
+        throw new Runtime_Exception('mail/part/file', sprintf(
           'Unable to resolve mimetype for given filename [filename: %1$s].', $filename_
         ));
       }
 
-      return new self($filename_, $content_, $mimeType_);
+      return new static($filename_, $content_, $mimeType_);
     }
 
     /**
@@ -119,7 +119,7 @@
      */
     public static function forFileContentsEncoded($filename_, $content_, Io_MimeType $mimeType_=null)
     {
-      $instance=self::forFileContents($filename_, $content_, $mimeType_);
+      $instance=static::forFileContents($filename_, $content_, $mimeType_);
       $instance->encoded=true;
 
       return $instance;
@@ -142,7 +142,7 @@
     protected function compileHeaders()
     {
       $this->header('Content-Type', sprintf('%1$s; name="%2$s"', $this->mimeType->name(), $this->filename));
-      $this->header('Content-Disposition', $this->contentDisposition);
+      $this->header('Content-Disposition', sprintf('%1$s; filename="%2$s"', $this->contentDisposition, $this->filename));
       $this->header('Content-Transfer-Encoding', $this->encoding);
       $this->header('Content-MD5', $this->contentMd5);
       $this->header('Content-ID', "<{$this->contentId}>");
