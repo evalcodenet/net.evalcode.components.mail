@@ -91,7 +91,6 @@
 
 
     // IMPLEMENTATION
-    // TODO mb_encode_mimeheader ..
     protected function compileHeaders()
     {
       $this->header('MIME-Version', $this->version);
