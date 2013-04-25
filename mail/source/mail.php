@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Mail
    *
@@ -33,7 +36,7 @@
     {
       parent::__construct(null, md5(uniqid()), Io_MimeType::MULTIPART_MIXED($charset_));
 
-      $this->date=new DateTime();
+      $this->date=new \DateTime();
       $this->version=self::MIME_VERSION;
       $this->messageId=md5(uniqid());
     }

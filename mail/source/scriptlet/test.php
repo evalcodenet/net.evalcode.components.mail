@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   class Mail_Scriptlet_Test extends Http_Scriptlet
   {
     public function post()
