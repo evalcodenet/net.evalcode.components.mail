@@ -130,7 +130,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function contentEncoded()
     {
       if(isset($this->encoded))

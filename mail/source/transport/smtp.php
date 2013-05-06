@@ -14,7 +14,7 @@ namespace Components;
    */
   class Mail_Transport_Smtp implements Mail_Transport
   {
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function send($to_, Mail $mail_)
     {
       // TODO Implement

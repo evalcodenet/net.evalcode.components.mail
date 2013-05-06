@@ -14,7 +14,7 @@ namespace Components;
    */
   interface Mail_Transport
   {
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     function send($to_, Mail $mail_);
     function sendRaw($to_, $subject_, $source_, array $headers_);
     //--------------------------------------------------------------------------

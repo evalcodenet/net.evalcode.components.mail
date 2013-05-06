@@ -70,7 +70,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     public function subjectEncoded()
     {
       $subject=iconv_mime_encode(

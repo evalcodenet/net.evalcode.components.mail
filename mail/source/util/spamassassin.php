@@ -29,7 +29,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     // FIXME Error handling.
     public function analyze()
     {

@@ -78,7 +78,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     /**
      * @param Mail_Part $part_
      *
@@ -149,7 +149,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function __get($name_)
     {
       if(array_key_exists($name_, $this->m_properties))

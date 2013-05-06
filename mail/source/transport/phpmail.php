@@ -14,7 +14,7 @@ namespace Components;
    */
   class Mail_Transport_Phpmail implements Mail_Transport
   {
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function send($to_, Mail $mail_)
     {
       return @mail($to_, $mail_->subjectEncoded(), $mail_->message(), $mail_->headersAsString());
