@@ -17,7 +17,7 @@ namespace Components;
   class Mail_Part_File extends Mail_Part
   {
     // CONSTRUCTION
-    public function __construct($filename_, $content_, Io_MimeType $mimeType_)
+    public function __construct($filename_, $content_, Io_Mimetype $mimeType_)
     {
       parent::__construct($content_, md5($filename_), $mimeType_);
 
@@ -30,7 +30,7 @@ namespace Components;
     // STATIC ACCESSORS
     /**
      * @param string $filepath_
-     * @param Io_MimeType $mimeType_
+     * @param Io_Mimetype $mimeType_
      *
      * @throws Runtime_Exception
      *
@@ -45,7 +45,7 @@ namespace Components;
         ));
       }
 
-      $mimeType=$file_->getMimeType();
+      $mimeType=$file_->getMimetype();
 
       if(null===$mimeType)
       {
@@ -59,13 +59,13 @@ namespace Components;
 
     /**
      * @param string $filepath_
-     * @param Io_MimeType $mimeType_
+     * @param Io_Mimetype $mimeType_
      *
      * @throws Runtime_Exception
      *
      * @return Mail_Part_Image
      */
-    public static function forFilePath($filepath_, Io_MimeType $mimeType_=null)
+    public static function forFilePath($filepath_, Io_Mimetype $mimeType_=null)
     {
       if(false===@is_file($filepath_))
       {
@@ -75,7 +75,7 @@ namespace Components;
       }
 
       if(null===$mimeType_)
-        $mimeType_=Io_MimeType::forFilePath($filepath_);
+        $mimeType_=Io_Mimetype::forFilePath($filepath_);
 
       if(null===$mimeType_)
       {
@@ -90,16 +90,16 @@ namespace Components;
     /**
      * @param string $filename_
      * @param string $content_
-     * @param Io_MimeType $mimeType_
+     * @param Io_Mimetype $mimeType_
      *
      * @throws Runtime_Exception
      *
      * @return Mail_Part_Image
      */
-    public static function forFileContents($filename_, $content_, Io_MimeType $mimeType_=null)
+    public static function forFileContents($filename_, $content_, Io_Mimetype $mimeType_=null)
     {
       if(null===$mimeType_)
-        $mimeType_=Io_MimeType::forFileName($filename_);
+        $mimeType_=Io_Mimetype::forFileName($filename_);
 
       if(null===$mimeType_)
       {
@@ -114,13 +114,13 @@ namespace Components;
     /**
      * @param string $filename_
      * @param string $content_
-     * @param Io_MimeType $mimeType_
+     * @param Io_Mimetype $mimeType_
      *
      * @throws Runtime_Exception
      *
      * @return Mail_Part_Image
      */
-    public static function forFileContentsEncoded($filename_, $content_, Io_MimeType $mimeType_=null)
+    public static function forFileContentsEncoded($filename_, $content_, Io_Mimetype $mimeType_=null)
     {
       $instance=static::forFileContents($filename_, $content_, $mimeType_);
       $instance->encoded=true;

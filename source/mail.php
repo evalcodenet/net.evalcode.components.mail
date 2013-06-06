@@ -34,7 +34,7 @@ namespace Components;
     // CONSTRUCTION
     public function __construct(Io_Charset $charset_)
     {
-      parent::__construct(null, md5(uniqid()), Io_MimeType::MULTIPART_MIXED($charset_));
+      parent::__construct(null, md5(uniqid()), Io_Mimetype::MULTIPART_MIXED($charset_));
 
       $this->date=new \DateTime();
       $this->version=self::MIME_VERSION;

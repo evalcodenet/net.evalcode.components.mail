@@ -17,7 +17,7 @@ namespace Components;
     // CONSTRUCTION
     public function __construct($content_, Io_Charset $charset_)
     {
-      parent::__construct($content_, md5($content_), Io_MimeType::TEXT_PLAIN($charset_));
+      parent::__construct($content_, md5($content_), Io_Mimetype::TEXT_PLAIN($charset_));
 
       $this->encoding=Mail::CONTENT_ENCODING_QUOTED_PRINTABLE;
     }

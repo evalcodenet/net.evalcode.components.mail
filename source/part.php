@@ -19,7 +19,7 @@ namespace Components;
    * @property string contentDisposition
    * @property string boundary
    * @property string encoding
-   * @property Io_MimeType mimeType
+   * @property Io_Mimetype mimeType
    */
   class Mail_Part
   {
@@ -32,7 +32,7 @@ namespace Components;
 
 
     // CONSTRUCTION
-    public function __construct($content_, $contentId_, Io_MimeType $mimeType_)
+    public function __construct($content_, $contentId_, Io_Mimetype $mimeType_)
     {
       if(null!==$content_)
       {
@@ -57,7 +57,7 @@ namespace Components;
      */
     public static function alternative()
     {
-      return new self(null, md5(uniqid()), Io_MimeType::MULTIPART_ALTERNATIVE());
+      return new self(null, md5(uniqid()), Io_Mimetype::MULTIPART_ALTERNATIVE());
     }
 
     /**
@@ -65,7 +65,7 @@ namespace Components;
      */
     public static function mixed()
     {
-      return new self(null, md5(uniqid()), Io_MimeType::MULTIPART_MIXED());
+      return new self(null, md5(uniqid()), Io_Mimetype::MULTIPART_MIXED());
     }
 
     /**
@@ -73,7 +73,7 @@ namespace Components;
      */
     public static function related()
     {
-      return new self(null, md5(uniqid()), Io_MimeType::MULTIPART_RELATED());
+      return new self(null, md5(uniqid()), Io_Mimetype::MULTIPART_RELATED());
     }
     //--------------------------------------------------------------------------
 
