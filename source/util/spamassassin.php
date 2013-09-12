@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Mail_Util_Spamassassin
    *
-   * @package net.evalcode.components
-   * @subpackage mail.util
+   * @package net.evalcode.components.mail
+   * @subpackage util
    *
    * @author evalcode.net
    */
@@ -100,8 +100,9 @@ namespace Components;
 
     // IMPLEMENTATION
     private $m_tests=array();
+
     /**
-     * @var Mail
+     * @var \Components\Mail
      */
     private $m_mail;
     private $m_score;

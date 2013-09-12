@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Mail
    *
-   * @package net.evalcode.components
-   * @subpackage mail
+   * @api
+   * @package net.evalcode.components.mail
    *
    * @author evalcode.net
    *
@@ -17,11 +17,11 @@ namespace Components;
    * @property string version
    * @property string messageId
    *
-   * @method Mail to
-   * @method Mail cc
-   * @method Mail bcc
-   * @method Mail from
-   * @method Mail replyTo
+   * @method \Components\Mail to
+   * @method \Components\Mail cc
+   * @method \Components\Mail bcc
+   * @method \Components\Mail from
+   * @method \Components\Mail replyTo
    */
   class Mail extends Mail_Part
   {
@@ -45,7 +45,7 @@ namespace Components;
 
     // STATIC ACCESSORS
     /**
-     * @return Mail
+     * @return \Components\Mail
      */
     public static function ascii()
     {
@@ -53,7 +53,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail
+     * @return \Components\Mail
      */
     public static function latin()
     {
@@ -61,7 +61,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail
+     * @return \Components\Mail
      */
     public static function utf8()
     {

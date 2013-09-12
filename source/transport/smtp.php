@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Mail_Transport_Smtp
    *
-   * @package net.evalcode.components
-   * @subpackage mail.transport
+   * @api
+   * @package net.evalcode.components.mail
+   * @subpackage transport
    *
    * @author evalcode.net
    */

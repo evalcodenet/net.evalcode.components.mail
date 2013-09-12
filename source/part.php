@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Mail_Part
    *
-   * @package net.evalcode.components
-   * @subpackage mail
+   * @api
+   * @package net.evalcode.components.mail
    *
    * @author evalcode.net
    *
@@ -19,7 +19,7 @@ namespace Components;
    * @property string contentDisposition
    * @property string boundary
    * @property string encoding
-   * @property Io_Mimetype mimeType
+   * @property \Components\Io_Mimetype mimeType
    */
   class Mail_Part
   {
@@ -53,7 +53,7 @@ namespace Components;
 
     // STATIC ACCESSORS
     /**
-     * @return Mail_Part
+     * @return \Components\Mail_Part
      */
     public static function alternative()
     {
@@ -61,7 +61,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail_Part
+     * @return \Components\Mail_Part
      */
     public static function mixed()
     {
@@ -69,7 +69,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail_Part
+     * @return \Components\Mail_Part
      */
     public static function related()
     {
@@ -80,9 +80,9 @@ namespace Components;
 
     // ACCESSORS
     /**
-     * @param Mail_Part $part_
+     * @param \Components\Mail_Part $part_
      *
-     * @return Mail|Mail_Part
+     * @return \Components\Mail|\Components\Mail_Part
      */
     public function add(Mail_Part $part_)
     {
@@ -92,9 +92,9 @@ namespace Components;
     }
 
     /**
-     * @param Mail_Part $part_
+     * @param \Components\Mail_Part $part_
      *
-     * @return Mail|Mail_Part
+     * @return \Components\Mail|\Components\Mail_Part
      */
     public function attach(Mail_Part $part_)
     {
@@ -108,7 +108,7 @@ namespace Components;
      * @param string $header_
      * @param string $value_
      *
-     * @return string|Mail
+     * @return \Components\Mail
      */
     public function header($header_, $value_=null)
     {
@@ -273,7 +273,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail_Part
+     * @return \Components\Mail_Part
      */
     private function compile()
     {

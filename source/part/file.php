@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Mail_Part_File
    *
-   * @package net.evalcode.components
-   * @subpackage mail.part
+   * @api
+   * @package net.evalcode.components.mail
+   * @subpackage part
    *
    * @author evalcode.net
    *
@@ -30,11 +31,11 @@ namespace Components;
     // STATIC ACCESSORS
     /**
      * @param string $filepath_
-     * @param Io_Mimetype $mimeType_
+     * @param \Components\Io_Mimetype $mimeType_
      *
-     * @throws Runtime_Exception
+     * @throws \Components\Runtime_Exception
      *
-     * @return Mail_Part_Image
+     * @return \Components\Mail_Part_Image
      */
     public static function forFile(Io_File $file_)
     {
@@ -59,11 +60,11 @@ namespace Components;
 
     /**
      * @param string $filepath_
-     * @param Io_Mimetype $mimeType_
+     * @param \Components\Io_Mimetype $mimeType_
      *
-     * @throws Runtime_Exception
+     * @throws \Components\Runtime_Exception
      *
-     * @return Mail_Part_Image
+     * @return \Components\Mail_Part_Image
      */
     public static function forFilePath($filepath_, Io_Mimetype $mimeType_=null)
     {
@@ -90,11 +91,11 @@ namespace Components;
     /**
      * @param string $filename_
      * @param string $content_
-     * @param Io_Mimetype $mimeType_
+     * @param \Components\Io_Mimetype $mimeType_
      *
-     * @throws Runtime_Exception
+     * @throws \Components\Runtime_Exception
      *
-     * @return Mail_Part_Image
+     * @return \Components\Mail_Part_Image
      */
     public static function forFileContents($filename_, $content_, Io_Mimetype $mimeType_=null)
     {
@@ -114,11 +115,11 @@ namespace Components;
     /**
      * @param string $filename_
      * @param string $content_
-     * @param Io_Mimetype $mimeType_
+     * @param \Components\Io_Mimetype $mimeType_
      *
-     * @throws Runtime_Exception
+     * @throws \Components\Runtime_Exception
      *
-     * @return Mail_Part_Image
+     * @return \Components\Mail_Part_Image
      */
     public static function forFileContentsEncoded($filename_, $content_, Io_Mimetype $mimeType_=null)
     {

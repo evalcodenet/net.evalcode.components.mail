@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Mail_Part_Text
    *
-   * @package net.evalcode.components
-   * @subpackage mail.part
+   * @api
+   * @package net.evalcode.components.mail
+   * @subpackage part
    *
    * @author evalcode.net
    */
@@ -26,7 +27,7 @@ namespace Components;
 
     // STATIC ACCESSORS
     /**
-     * @return Mail_Part_Text
+     * @return \Components\Mail_Part_Text
      */
     public static function ascii($content_)
     {
@@ -34,7 +35,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail_Part_Text
+     * @return \Components\Mail_Part_Text
      */
     public static function latin($content_)
     {
@@ -42,7 +43,7 @@ namespace Components;
     }
 
     /**
-     * @return Mail_Part_Text
+     * @return \Components\Mail_Part_Text
      */
     public static function utf8($content_)
     {

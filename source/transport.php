@@ -7,10 +7,11 @@ namespace Components;
   /**
    * Mail_Transport
    *
-   * @package net.evalcode.components
-   * @subpackage mail
+   * @package net.evalcode.components.mail
    *
    * @author evalcode.net
+   *
+   * @api
    */
   interface Mail_Transport
   {
