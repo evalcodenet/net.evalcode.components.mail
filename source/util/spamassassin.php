@@ -42,7 +42,7 @@ namespace Components;
         2=>array('pipe', 'w+'),
       );
 
-      $pipes=array();
+      $pipes=[];
       $pid=@proc_open(self::CMD_BIN.' '.escapeshellarg(self::CMD_ARG), $desc, $pipes);
 
       if(false!==$pid)
@@ -67,13 +67,13 @@ namespace Components;
       $this->m_score=(float)reset($chunks);
       $this->m_scoreThreshold=(float)end($chunks);
 
-      $this->m_tests=array();
+      $this->m_tests=[];
       foreach($lines as $line)
       {
         if(String::startsWith($line, '---'))
           break;
 
-        $matches=array();
+        $matches=[];
         preg_match('/([-+\d.\d]+)\s+(\w*)\s+([\s\S]*)/', $line, $matches);
 
         if(isset($matches[3]))
@@ -99,7 +99,7 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private $m_tests=array();
+    private $m_tests=[];
 
     /**
      * @var \Components\Mail

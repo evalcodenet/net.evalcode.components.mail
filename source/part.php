@@ -182,7 +182,7 @@ namespace Components;
       return $this;
     }
 
-    public function __call($name_, array $args_=array())
+    public function __call($name_, array $args_=[])
     {
       if(0===count($args_))
       {
@@ -217,9 +217,9 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private $m_headers=array();
-    private $m_parts=array();
-    private $m_properties=array();
+    private $m_headers=[];
+    private $m_parts=[];
+    private $m_properties=[];
 
     private $m_compiled=false;
 
@@ -249,7 +249,7 @@ namespace Components;
 
     protected function compileMessage()
     {
-      $message=array();
+      $message=[];
 
       if(count($this->m_parts))
       {
@@ -282,7 +282,7 @@ namespace Components;
 
       $this->compileHeaders();
 
-      $headers=array();
+      $headers=[];
       foreach($this->headers() as $header=>$value)
         $headers[]="$header: $value";
 

@@ -105,7 +105,7 @@ namespace Components;
         if(!($addresses=$this->{str_replace('-', '', $addressType)}()) || false===is_array($addresses))
           continue;
 
-        $addressStrings=array();
+        $addressStrings=[];
         foreach($addresses as $email=>$name)
         {
           if(null===$name || 1>mb_strlen($name))
