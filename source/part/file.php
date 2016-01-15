@@ -41,7 +41,7 @@ namespace Components;
     {
       if(false===$file_->exists())
       {
-        throw new Runtime_Exception('mail/part/file', sprintf(
+        throw new Io_Exception('mail/part/file', sprintf(
           'File does not exist [file: %1$s].', $file_
         ));
       }
@@ -50,7 +50,7 @@ namespace Components;
 
       if(null===$mimeType)
       {
-        throw new Runtime_Exception('mail/part/file', sprintf(
+        throw new Io_Exception('mail/part/file', sprintf(
           'Unable to resolve mimetype for given file [file: %1$s].', $file_
         ));
       }
@@ -70,7 +70,7 @@ namespace Components;
     {
       if(false===@is_file($filepath_))
       {
-        throw new Runtime_Exception('mail/part/file', sprintf(
+        throw new Io_Exception('mail/part/file', sprintf(
           'Unable to resolve file for given path [filepath: %1$s].', $filepath_
         ));
       }
@@ -80,7 +80,7 @@ namespace Components;
 
       if(null===$mimeType_)
       {
-        throw new Runtime_Exception('mail/part/file', sprintf(
+        throw new Io_Exception('mail/part/file', sprintf(
           'Unable to resolve mimetype for given path [filepath: %1$s].', $filepath_
         ));
       }
@@ -104,7 +104,7 @@ namespace Components;
 
       if(null===$mimeType_)
       {
-        throw new Runtime_Exception('mail/part/file', sprintf(
+        throw new Io_Exception('mail/part/file', sprintf(
           'Unable to resolve mimetype for given filename [filename: %1$s].', $filename_
         ));
       }

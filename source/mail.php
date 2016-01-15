@@ -73,13 +73,12 @@ namespace Components;
     // ACCESSORS
     public function subjectEncoded()
     {
-      $subject=iconv_mime_encode(
-        null,
+      return mb_encode_mimeheader(
         $this->subject,
-        array('scheme'=>'Q', 'input-charset'=>$this->mimeType->charset()->name(), 'line-length'=>76, 'line-break'=>"\n")
+        $this->mimeType->charset()->name(),
+        'Q',
+        "\n"
       );
-
-      return mb_substr($subject, 2);
     }
 
     public function messageId()
@@ -100,7 +99,7 @@ namespace Components;
       $this->header('Date', $this->date->format(self::DATE_RFC_2822));
       $this->header('Subject', $this->subjectEncoded());
 
-      foreach(array('to', 'cc', 'bcc', 'from', 'reply-To') as $addressType)
+      foreach(['to', 'cc', 'bcc', 'from', 'reply-To'] as $addressType)
       {
         if(!($addresses=$this->{str_replace('-', '', $addressType)}()) || false===is_array($addresses))
           continue;
